@@ -2,7 +2,7 @@
 
 # Replicate random sampling
 set.seed(542)
-setwd("C:/Users/ericv/OneDrive/Documents/MATH 303")
+setwd("C:/Users/ericv/Documents/GitHub/burrito")
 
 # Read in csv
 bur <- read.csv("burrito_psample.csv", na = "")
