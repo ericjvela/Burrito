@@ -44,7 +44,7 @@ Senor Panchos,California,San Marcos,North,6.25,21,19.5,0.64,3,4,4,3,4.5,4,4,5,4
 Caliente Mexican Food,California,Sorrento Valley,Coastal,6.47,23,22,0.89,1,2,2,2,3,1,2,3,2
 El Dorado Mexican Food,California,Temecula,North,7.4,19.5,24.5,0.93,5,4,4.2,3.5,3,4,4,4,4
 El Zarape,California,University Heights,South,6.25,17,22,0.65,3,4,4,4,4,2,3,5,4
-Taco Villa,California,UTC,Coastal,,18.5,21.5,0.68,3,3,3.5,4,1.5,3.8,4,5,4
+Taco Villa,California,UTC,Coastal,6.99,18.5,21.5,0.68,3,3,3.5,4,1.5,3.8,4,5,4
 Taco VIlla,California,UTC,Coastal,6.99,20.5,21.5,0.75,4,4,3.5,3.5,3.5,3.5,3.5,5,3.7
 Pollos Maria,Carne Asada,Carlsbad,Coastal,6.49,17.5,17,0.4,3.5,4,3,4,4,3,4,4.5,3.5
 Carmen's Mexican Food,Carne Asada,Clairemont,Coastal,6.5,21,21,0.74,4.5,4.5,3.5,4,3.5,4,4,4,4
@@ -54,12 +54,12 @@ Lolita's Taco Shop,Carne Asada,Kearny Mesa,South,6.25,15,20.5,0.5,1.5,2.5,3,4.5,
 California Burritos,Carne Asada,Linda Vista,Coastal,6.25,23,21.5,0.85,4,3,5,4,4,5,5,3,4.2
 California Burritos,Carne Asada,Linda Vista,Coastal,6.25,22,20,0.7,4.5,4,4,4.5,4,4.5,4.5,4,4
 Rigoberto's Taco Shop,Carne Asada,Miramar,South,6.6,22,22,0.85,4,3.5,4,4,4,4,4.5,4.5,4
-Rigoberto's Taco Shop,Carne Asada,Miramar,South,6.6,23,22,0.89,4,3,3,3,3,,3.5,4.5,3
+Rigoberto's Taco Shop,Carne Asada,Miramar,South,6.6,23,22,0.89,4,3,3,3,3,4,3.5,4.5,3
 Mr. Ruribertos Taco Shop ,Carne Asada,Mission Beach,Coastal,7.75,19.5,21,0.68,4,4.5,2,2,3.5,2,2,4,3
 Taco Surf PB,Carne Asada,Pacific Beach,Coastal,6.02,19.5,20.5,0.65,4.5,2,3.3,3.4,4.5,3.8,3.7,5,3.7
 Caliente Mexican Food,Carne Asada,Sorrento Valley,Coastal,5.56,21.5,20,0.68,2.5,3,2.5,3.5,4.5,3.7,3.3,4.5,3.5
-El Zarape,Carne Asada,University Heights,Coastal,6.25,18,21,0.63,4,4,,3.5,4,4,4,4,4
-Chipotle,Carnitas,Carlsbad,Coastal,7.15,16.5,26.5,0.92,2.5,2.5,3,2.8,3.5,,3,3.5,2.75
+El Zarape,Carne Asada,University Heights,Coastal,6.25,18,21,0.63,4,4,3.5,3.5,4,4,4,4,4
+Chipotle,Carnitas,Carlsbad,Coastal,7.15,16.5,26.5,0.92,2.5,2.5,3,2.8,3.5,3,3,3.5,2.75
 El Portal Fresh Mexican Grill,Carnitas,Clairemont,Coastal,6.7,18,22.5,0.73,3.5,4,4,3,4,3,3.5,4.5,3.75
 Lourdes,Carnitas,Encinitas,Coastal,7.35,21,19,0.6,3.5,3,3.5,3,4.5,4,4,5,3.75
 Los Primos Mexican Food,Carnitas,UTC,Coastal,6.35,18,20.5,0.6,4,4,2.5,2,2,2,2,3,2
