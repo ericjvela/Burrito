@@ -66,7 +66,7 @@ comp <- data.frame("Bins" = c("0-1", "1-2", "2-3", "3-4", "4-5"),
                    "SynergyRfreq" = c(0/75, 1/75, 9/75, 28/75, 37/75),
                    "UniformityFreq" = c(0, 6, 17, 21, 31),
                    "UniformityRfreq" = c(0/75, 6/75, 17/75, 21/75, 31/75)
-                   )
+)
 
 barplot(comp$SynergyRfreq, names.arg=comp$Bins, ylim = c(0,.50), xlab = "Ranges", ylab = "Relative Frequency", main = "Relative Frequency Bar Graph for Synergy")
 barplot(comp$UniformityRfreq, names.arg=comp$Bins, ylim = c(0,.50), xlab = "Ranges", ylab = "Relative Frequency", main = "Relative Frequency Bar Graph for Uniformity")
@@ -191,20 +191,9 @@ ggplot(meat, aes(x=Burrito, y=Mean, fill=Burrito)) +
 cormat <- cor(subset(bur, select = -c(Burrito, Neighborhood, Region)))
 cormat[,13]
 # Best model for the data set
-all <- lm(Overall ~ Synergy + Meat + Uniformity,data = bur)
+all <- lm(Overall ~ Synergy + Meat + Fillings + Uniformity,data = bur)
 all
-
 summary(all)
-
-par(mfrow=c(2,2))
-plot(bur$Synergy, bur$Overall, main = "Synergy vs Overall", xlab = "Synergy Score", ylab = "Overall Quality")
-abline(lm(bur$Overall ~ bur$Synergy), lwd = 2, col = "red")
-plot(bur$Meat, bur$Overall, main = "Meat Quality vs Overall", xlab = "Meat Quality", ylab = "Overall Quality")
-abline(lm(bur$Overall ~ bur$Meat), lwd = 2, col = "red")
-plot(bur$Fillings, bur$Overall, main = "Fillings Score vs Overall", xlab = "Fillings Score", ylab = "Overall Quality")
-abline(lm(bur$Overall ~ bur$Meat), lwd = 2, col = "red")
-plot(bur$Uniformity, bur$Overall, main = "Uniformity Score vs Overall", xlab = "Uniformity Score", ylab = "Overall Quality")
-abline(lm(bur$Overall ~ bur$Uniformity), lwd = 2, col = "red")
 
 # Meat mean bar graphs
 cost <- aggregate(bur$Cost, by = list("Region" = bur$Region), FUN=function(x) c(mean=mean(x),sd=sd(x),n=length(x)))
@@ -243,26 +232,8 @@ table(bur$Synergy, bur$Uniformity)
 breaks <- seq(0,6, length = 7)
 synergy_cut <- cut(bur$Synergy, breaks, right = FALSE)
 uniformity_cut <- cut(bur$Uniformity, breaks, right = FALSE)
-
-
 xtab <- table(synergy_cut, uniformity_cut)
-xtab_t <- prop.table(t(xtab),2)
-par(mfrow=c(1,2))
-barplot(xtab_t, 
-        xlab = "Synergy", 
-        names.arg = row.names(xtab), 
-        col = terrain.colors(6),
-        main = "Relative Frequencies of Synergy and Uniformity",
-        legend = TRUE,
-        args.legend=list(title="Uniformity Score"),
-        xlim = c(0,10))
-tab_s <- table(bur$Synergy, bur$Uniformity)
-chisq.test(tab_s)
 
-breaks_new <- seq(0,6, length = 3)
-synergy_cut_new <- cut(bur$Synergy, breaks_new, right = FALSE)
-uniformity_cut_new <- cut(bur$Uniformity, breaks_new, right = FALSE)
-xtab_new <- table(synergy_cut_new, uniformity_cut_new)s
-chisq.test(xtab_new)
 
-plot(bur$Synergy, bur$Uniformity, xlab = "Synergy" , ylab = "Uniformity", main = "Scatterplot of Uniformity and Synergy")
+barplot(prop.table(t(xtab),2), xlab = "Synergy", names.arg = row.names(xtab))
+typeof(rownames(xtab))
