@@ -68,7 +68,6 @@ comp <- data.frame("Bins" = c("0-1", "1-2", "2-3", "3-4", "4-5"),
                    "UniformityRfreq" = c(0/75, 6/75, 17/75, 21/75, 31/75)
                    )
 
-plot(comp$Bins, comp$SynergyRfreq, type = "h")
 barplot(comp$SynergyRfreq, names.arg=comp$Bins, ylim = c(0,.50), xlab = "Ranges", ylab = "Relative Frequency", main = "Relative Frequency Bar Graph for Synergy")
 barplot(comp$UniformityRfreq, names.arg=comp$Bins, ylim = c(0,.50), xlab = "Ranges", ylab = "Relative Frequency", main = "Relative Frequency Bar Graph for Uniformity")
 
@@ -164,4 +163,41 @@ fit_cost <- lm(bur$Overall ~ bur$Synergy)
 summary(fit_cost)
 fit_cost
 sd(fit_cost$residuals)
+
+# Meat mean bar graphs
+meat <- aggregate(bur$Meat, by = list("Burrito" = bur$Burrito), FUN=function(x) c(mean=mean(x),sd=sd(x),n=length(x)))
+meat <- do.call(data.frame, df3) 
+colnames(meat) <- c("Burrito", "Mean", "SD", "n")
+meat$SE <- meat$SD/sqrt(meat$n)
+
+ggplot(meat, aes(x=Burrito, y=Mean, fill=Burrito)) +
+  geom_bar(position=position_dodge(0.5), stat="identity",
+           width = 0.5)+ 
+  geom_errorbar(aes(ymin=Mean-2*SE, ymax=Mean+2*SE),
+                size=0.5, width=0.2,
+                position = position_dodge(0.5))+
+  theme_classic()+
+  # #geom_text(aes(x=Source, y=Mean+2*SE+1.75,
+  #               label= out.aov.sodium$groups$groups),
+  #           position = position_dodge(width = 0.9), size=4)+
+  ylim(0,5)+
+  ggtitle("Mean Meat Quality per Burrito") +
+  ylab("Rating (1-5)")+
+  theme(
+    plot.title = element_text(hjust = 0.5))
+
+
 cor(bur$Synergy, bur$Overall)
+
+cor(bur$Cost, bur$Circum)
+cor(bur$Uniformity, bur$Length)
+cor(bur$Meat)
+cor(bur)
+cor(subset(bur, select = -c(Burrito, Neighborhood, Region)))
+
+plot(bur$Fillings, bur$Cost, main = "Fillings vs Cost", xlab = "Fillings Score", ylab = "Cost")
+abline(lm(bur$Cost ~ bur$Fillings), lwd = 2, col = "red")
+fit <- lm(bur$Cost ~ bur$Fillings)
+summary(fit)
+fit
+sd(fit_cost$residuals)
