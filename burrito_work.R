@@ -166,7 +166,7 @@ sd(fit_cost$residuals)
 
 # Meat mean bar graphs
 meat <- aggregate(bur$Meat, by = list("Burrito" = bur$Burrito), FUN=function(x) c(mean=mean(x),sd=sd(x),n=length(x)))
-meat <- do.call(data.frame, df3) 
+meat <- do.call(data.frame, meat) 
 colnames(meat) <- c("Burrito", "Mean", "SD", "n")
 meat$SE <- meat$SD/sqrt(meat$n)
 
@@ -187,17 +187,53 @@ ggplot(meat, aes(x=Burrito, y=Mean, fill=Burrito)) +
     plot.title = element_text(hjust = 0.5))
 
 
-cor(bur$Synergy, bur$Overall)
+# Correlation matrix
+cormat <- cor(subset(bur, select = -c(Burrito, Neighborhood, Region)))
+cormat[,13]
+# Best model for the data set
+all <- lm(Overall ~ Synergy + Meat + Fillings + Uniformity,data = bur)
+all
+summary(all)
 
-cor(bur$Cost, bur$Circum)
-cor(bur$Uniformity, bur$Length)
-cor(bur$Meat)
-cor(bur)
-cor(subset(bur, select = -c(Burrito, Neighborhood, Region)))
+# Meat mean bar graphs
+cost <- aggregate(bur$Cost, by = list("Region" = bur$Region), FUN=function(x) c(mean=mean(x),sd=sd(x),n=length(x)))
+cost <- do.call(data.frame, cost) 
+colnames(cost) <- c("Region", "Mean", "SD", "n")
+cost$SE <- cost$SD/sqrt(cost$n)
 
-plot(bur$Fillings, bur$Cost, main = "Fillings vs Cost", xlab = "Fillings Score", ylab = "Cost")
-abline(lm(bur$Cost ~ bur$Fillings), lwd = 2, col = "red")
-fit <- lm(bur$Cost ~ bur$Fillings)
-summary(fit)
-fit
-sd(fit_cost$residuals)
+ggplot(cost, aes(x=Region, y=Mean, fill=Region)) +
+  geom_bar(position=position_dodge(0.5), stat="identity",
+           width = 0.5)
+
+ggplot(cost, aes(x=Region, y=Mean, fill=Region)) +
+  geom_bar(position=position_dodge(0.5), stat="identity",
+           width = 0.5)+ 
+  geom_errorbar(aes(ymin=Mean-2*SE, ymax=Mean+2*SE),
+                size=0.5, width=0.2,
+                position = position_dodge(0.5))+
+  theme_classic()+
+  # #geom_text(aes(x=Source, y=Mean+2*SE+1.75,
+  #               label= out.aov.sodium$groups$groups),
+  #           position = position_dodge(width = 0.9), size=4)+
+  ggtitle("Mean Cost per Burrito") +
+  ylab("Mean Cost")+
+  theme(
+    plot.title = element_text(hjust = 0.5))
+
+# boxplot for meat and fillings and wrap
+boxplot(bur$Meat ~ bur$Burrito, las = 2, main = "Meat Score")
+boxplot(bur$Fillings ~ bur$Burrito, las = 2, main = "Fillings")
+boxplot(bur$Wrap ~ bur$Burrito, las = 2, main = "Wrap")
+
+
+
+table(bur$Synergy, bur$Uniformity)
+# create a column 
+breaks <- seq(0,6, length = 7)
+synergy_cut <- cut(bur$Synergy, breaks, right = FALSE)
+uniformity_cut <- cut(bur$Uniformity, breaks, right = FALSE)
+xtab <- table(synergy_cut, uniformity_cut)
+
+
+barplot(prop.table(t(xtab),2), xlab = "Synergy", names.arg = row.names(xtab))
+typeof(rownames(xtab))
